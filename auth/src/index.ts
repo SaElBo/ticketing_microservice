@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
 import { app } from "./app";
-import { DatabaseConnectionError } from "./errors/DatabaseConnectionError";
+import { DatabaseConnectionError } from "@bousal/common";
 const PORT = 3000;
-
-
 
 const start = async () => {
   if (!process.env.JWT_KEY) {

@@ -2,7 +2,7 @@ import { scrypt, randomBytes } from "crypto";
 import { promisify } from "util";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { UserDoc } from "../models/User/UserInterfaces";
-import { UserPayload } from "../interfaces/UserPayload";
+import { UserPayload } from "@bousal/common";
 const scryptAsinc = promisify(scrypt);
 
 export class UserService {
