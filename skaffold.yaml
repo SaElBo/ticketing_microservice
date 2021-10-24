@@ -20,6 +20,10 @@ build:
       context: docs
       docker:
         dockerfile : Dockerfile
+    - image: sal/tickets
+      context: tickets
+      docker:
+        dockerfile : Dockerfile
       sync:
         manual:
           - src: 'src/**/*.js'
