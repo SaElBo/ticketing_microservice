@@ -17,3 +17,10 @@ spec:
                 name: auth-srv
                 port:
                   number: 3000
+          - path: /api/docs/api-docs/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: docs-srv
+                port:
+                  number: 3000

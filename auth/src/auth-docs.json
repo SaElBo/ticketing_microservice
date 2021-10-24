@@ -1,0 +1,21 @@
+{
+  "swagger": "2.0",
+
+  "host": "ticketing.dev",
+
+  "schemes": ["https", "http"],
+  "paths": {
+    "/api/users/singin": {
+      "post": {
+        "tags": ["tags"],
+        "summary": " signn in ",
+
+        "responses": {
+          "200": {
+            "description": "descrizione"
+          }
+        }
+      }
+    }
+  }
+}

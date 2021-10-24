@@ -1,21 +1,24 @@
 import UserRepository from "../repository/UserRepository";
 import Controller from "./Controller";
 import { Request, Response } from "express";
-import { validationResult } from "express-validator";
-import { DatabaseConnectionError } from "../errors/DatabaseConnectionError";
-import { RequestValidationError } from "../errors/RequestValidationError";
 import { BadRequestError } from "../errors/BadRequestError";
+import { User } from "../models/User/User";
+import { UserService } from "../services/UserService";
+
+import { UserPayload } from "../interfaces/UserPayload";
+declare global {
+  namespace Express {
+      interface Request {
+          currentUser? : UserPayload
+      }
+  }
+}
 export default class UserController extends Controller<UserRepository> {
   constructor(repo: UserRepository) {
     super(repo);
   }
-  
-  async signUp(req: Request, res: Response) {
-    const errors = validationResult(req);
 
-    if (!errors.isEmpty) {
-      throw new RequestValidationError(errors.array());
-    }
+  async signUp(req: Request, res: Response) {
     const { email, password } = req.body;
 
     const existingUser = await this.model.find({ email });
@@ -23,10 +26,45 @@ export default class UserController extends Controller<UserRepository> {
       throw new BadRequestError("Email in use");
     }
     const user = await this.model.build({ email, password });
-    user.save();
+    await user.save();
+
+    //generate jwt
+    const userJwt = UserService.generateJWT(user);
+    //store on cookie
+    req.session = {
+      jwt: userJwt,
+    };
+
     res.status(201).send(user);
   }
-  static test(req: Request, res: Response) {
-    res.send("ok funziona");
+  async signIn(req: Request, res: Response) {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw new BadRequestError("Invalid credentials");
+    }
+    const passwordMatch = await UserService.comparePassword(
+      user.password,
+      password
+    );
+
+    if (!passwordMatch) {
+      throw new BadRequestError("Invalid credentials");
+    }
+    const userJwt = UserService.generateJWT(user);
+    //store on cookie
+    req.session = {
+      jwt: userJwt,
+    };
+
+    res.status(200).send(user);
+  }
+  currentUser(req: Request, res: Response) {
+    res.send({ currentUser: req.currentUser || null});
+  }
+  signOut(req: Request, res: Response) {
+    req.session = null;
+    res.send({});
   }
 }
