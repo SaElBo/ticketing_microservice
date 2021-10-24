@@ -1,18 +1,10 @@
 import UserRepository from "../repository/UserRepository";
-import Controller from "./Controller";
+import {Controller, BadRequestError} from "@bousal/common";
 import { Request, Response } from "express";
-import { BadRequestError } from "../errors/BadRequestError";
 import { User } from "../models/User/User";
 import { UserService } from "../services/UserService";
 
-import { UserPayload } from "../interfaces/UserPayload";
-declare global {
-  namespace Express {
-      interface Request {
-          currentUser? : UserPayload
-      }
-  }
-}
+
 export default class UserController extends Controller<UserRepository> {
   constructor(repo: UserRepository) {
     super(repo);

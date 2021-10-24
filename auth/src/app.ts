@@ -3,8 +3,7 @@ import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
 
-import { errorHandler } from "./middlewares/error-handler";
-import { NotFoundEror } from "./errors/NotFoundError";
+import { errorHandler , NotFoundEror} from "@bousal/common";
 import { api } from "./routes/api";
 
 const app = express();

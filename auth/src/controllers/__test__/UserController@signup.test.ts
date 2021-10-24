@@ -1,6 +1,6 @@
 import request from "supertest";
 import { app } from "../../app";
-import { BadRequestError } from "../../errors/BadRequestError";
+import { BadRequestError } from "@bousal/common";
 
 //SIGNUP
 it("return a 201 on successful signup", async () => {
