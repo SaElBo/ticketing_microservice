@@ -48,27 +48,27 @@ it("return a 400 with missing email or password", async () => {
     .expect(400);
 });
 
-it("return a BadRequestError with wrong password", async () => {
-  try {
-    request(app).post("/api/users/signup").send({
-      email: "test@test.com",
-      password: "p",
-    });
-  } catch (e) {
-    expect(e).toBeInstanceOf(BadRequestError);
-  }
-});
+// it("return a BadRequestError with wrong password", async () => {
+//   try {
+//     request(app).post("/api/users/signup").send({
+//       email: "test@test.com",
+//       password: "p",
+//     });
+//   } catch (e) {
+//     expect(e).toBeInstanceOf(BadRequestError);
+//   }
+// });
 
-it("return a BadRequestError with wrong email", async () => {
-  try {
-    request(app).post("/api/users/signup").send({
-      email: "test",
-      password: "password",
-    });
-  } catch (e) {
-    expect(e).toBeInstanceOf(BadRequestError);
-  }
-});
+// it("return a BadRequestError with wrong email", async () => {
+//   try {
+//     request(app).post("/api/users/signup").send({
+//       email: "test",
+//       password: "password",
+//     });
+//   } catch (e) {
+//     expect(e).toBeInstanceOf(BadRequestError);
+//   }
+// });
 
 it("return a user on successfull signup", async () => {
   const res = await request(app).post("/api/users/signup").send({
