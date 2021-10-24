@@ -19,7 +19,7 @@ jobs:
           node-version: '12.x'
       - name: auth tests
         run: cd auth
-    
+      - run : pwd
       - name: Install dependencies
         run: npm i
       - run: npm run test
