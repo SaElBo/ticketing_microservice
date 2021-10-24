@@ -19,6 +19,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
-      - run : cd auth
-      - run: npm install
-      - run: npm run test
+      
+      - name : install auth dependecy
+        run: npm install
+        working-directory: auth
+      - name : run auth test
+        run: npm run test
+        working-directory: auth
