@@ -5,14 +5,7 @@ import { BadRequestError } from "../errors/BadRequestError";
 import { User } from "../models/User/User";
 import { UserService } from "../services/UserService";
 
-import { UserPayload } from "../interfaces/UserPayload";
-declare global {
-  namespace Express {
-      interface Request {
-          currentUser? : UserPayload
-      }
-  }
-}
+
 export default class UserController extends Controller<UserRepository> {
   constructor(repo: UserRepository) {
     super(repo);

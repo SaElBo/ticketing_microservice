@@ -1,5 +1,5 @@
 import { Document } from "mongoose";
-import Repository from "./Repository";
+import Repository from "../../../common/src/repository/Repository";
 import { User } from "../models/User/User";
 import { FilterQuery } from "mongoose";
 import { UserAttr, UserDoc, UserModel } from "../models/User/UserInterfaces";
