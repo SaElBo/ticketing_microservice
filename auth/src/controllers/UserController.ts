@@ -1,7 +1,6 @@
 import UserRepository from "../repository/UserRepository";
-import Controller from "./Controller";
+import {Controller, BadRequestError} from "@bousal/common";
 import { Request, Response } from "express";
-import { BadRequestError } from "../errors/BadRequestError";
 import { User } from "../models/User/User";
 import { UserService } from "../services/UserService";
 

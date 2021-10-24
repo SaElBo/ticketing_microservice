@@ -13,5 +13,5 @@ it("responds with details about the current user", async () => {
     .get("/api/users/currentuser")
     .send()
     .expect(200);
-  expect(res.body.user).toBeDefined();
+  expect(res.body.currentUser).toBeDefined();
 });

@@ -3,8 +3,7 @@ import { body } from "express-validator";
 const router = express.Router();
 import UserController from "../controllers/UserController";
 import UserRepository from "../repository/UserRepository";
-import { validateRequest } from "../middlewares/validate-request";
-import { currentUser } from "../middlewares/current-user";
+import { validateRequest, currentUser } from "@bousal/common";
 const controller = new UserController(new UserRepository());
 router.post(
   "/api/users/signup",
