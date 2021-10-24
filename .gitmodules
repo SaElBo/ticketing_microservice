@@ -1,3 +1,4 @@
 [submodule "common"]
 	path = common
-	url = ./common
+	url = git@github.com:SaElBo/ticketing_microservice_common.git
+
