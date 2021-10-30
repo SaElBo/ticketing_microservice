@@ -4,6 +4,7 @@ import { json } from "body-parser";
 import cookieSession from "cookie-session";
 
 import { errorHandler , NotFoundEror} from "@bousal/common";
+import { api } from "./routes/api";
 
 
 const app = express();
@@ -19,10 +20,10 @@ app.use(
   "/api/users/tickets-docs.json",
   express.static(__dirname + "/tickets-docs.json")
 );
-
+app.use(api);
 
 app.all("*", () => {
-  throw NotFoundEror;
+  throw new NotFoundEror();
 });
 
 app.use(errorHandler);
