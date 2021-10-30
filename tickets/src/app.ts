@@ -3,9 +3,8 @@ import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
 
-import { errorHandler , NotFoundEror} from "@bousal/common";
+import { errorHandler, NotFoundEror, currentUser } from "@bousal/common";
 import { api } from "./routes/api";
-
 
 const app = express();
 app.set("trust proxy", true);
@@ -16,6 +15,7 @@ app.use(
     secure: process.env.NODE_ENV !== "test",
   })
 );
+app.use(currentUser);
 app.use(
   "/api/users/tickets-docs.json",
   express.static(__dirname + "/tickets-docs.json")
