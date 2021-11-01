@@ -22,7 +22,7 @@ app.use(
 app.use(api);
 
 app.all("*", () => {
-  throw NotFoundEror;
+  throw new NotFoundEror();
 });
 
 app.use(errorHandler);

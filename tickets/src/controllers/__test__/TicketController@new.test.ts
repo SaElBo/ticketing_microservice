@@ -3,12 +3,30 @@ import { app } from "../../app";
 
 it("has a route handler listening to /api/tickets from post request", async () => {
   const res = await request(app).post("/api/tickets").send({});
-  console.log(res.status);
   expect(res.status).not.toEqual(404);
 });
 it("can only be accessed if user is signe in", async () => {
   await request(app).post("/api/tickets").send({}).expect(401);
 });
-it("return an error if inavalid title is provided", async () => {});
-it("return an error if inavalid price is provided", async () => {});
+it("return a status other than 401 if user is signe in ", async () => {
+  const res = await request(app)
+    .post("/api/tickets")
+    .set("Cookie", global.signin())
+    .send({});
+  expect(res.status).not.toEqual(401);
+});
+it("return an error if inavalid title is provided", async () => {
+  await request(app)
+    .post("/api/tickets")
+    .set("Cookie", global.signin())
+    .send({ title: "", price: 10 })
+    .expect(400);
+});
+it("return an error if inavalid price is provided", async () => {
+  await request(app)
+    .post("/api/tickets")
+    .set("Cookie", global.signin())
+    .send({ title: "test", price: -10 })
+    .expect(400);
+});
 it("creates a ticket with valid inputs", async () => {});
