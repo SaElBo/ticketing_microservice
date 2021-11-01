@@ -24,5 +24,8 @@ router.post(
 router.get("/api/tickets/:id", (req: Request, res: Response) =>
   controller.show(req, res)
 );
+router.get("/api/tickets", (req: Request, res: Response) =>
+  controller.index(req, res)
+);
 
 export { router as api };

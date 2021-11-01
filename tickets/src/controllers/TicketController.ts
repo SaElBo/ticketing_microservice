@@ -21,4 +21,9 @@ export default class TicketController extends Controller<TicketRepository> {
     }
     res.send(ticket);
   }
+  async index(req: Request, res: Response) {
+    const tickets = await this.model.all();
+
+    res.send(tickets);
+  }
 }

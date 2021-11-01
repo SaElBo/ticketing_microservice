@@ -20,4 +20,7 @@ export default class TicketRepository extends Repository<
     const ticket = await Ticket.findById(id);
     return ticket;
   }
+  async all() {
+    return await Ticket.find();
+  }
 }
