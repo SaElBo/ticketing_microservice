@@ -7,6 +7,10 @@ export default class TicketController extends Controller<TicketRepository> {
   }
 
   async new(req: Request, res: Response) {
-    res.send(200);
+    const { title, price } = req.body;
+    const userId = req.currentUser!.id;
+    const ticket = await this.model.build({ title, price, userId });
+    await ticket.save();
+    res.status(201).send(ticket);
   }
 }

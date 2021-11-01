@@ -14,6 +14,6 @@ export default class TicketRepository extends Repository<
   }
   async find(filter: FilterQuery<TicketDoc>) {
     const ticket = await Ticket.find(filter);
-    return ticket.length > 0 ? ticket : null;
+    return ticket;
   }
 }
